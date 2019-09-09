@@ -3,14 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.training.regression.tests.LoginExcelTest">
+      <class name="com.training.regression.tests.ELTC_014">
         <methods>
-          <include name="tearDown"/>
-          <include name="loginDBTest" invocation-numbers="3 4"/>
-          <include name="setUpBeforeClass"/>
+          <include name="courseDetailsTest"/>
           <include name="setUp"/>
+          <include name="setUpBeforeClass"/>
         </methods>
-      </class> <!-- com.training.regression.tests.LoginExcelTest -->
+      </class> <!-- com.training.regression.tests.ELTC_014 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

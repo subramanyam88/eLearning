@@ -9,17 +9,20 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
+import org.testng.Assert;
 import com.training.generics.ScreenShot;
 import com.training.pom.LoginPOM;
+import com.training.pom.UserPortalPOM;
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
 
-public class LoginTests {
+
+public class ELTC_015 {
 
 	private WebDriver driver;
 	private String baseUrl;
 	private LoginPOM loginPOM;
+	private UserPortalPOM userportalPOM;
 	private static Properties properties;
 	private ScreenShot screenShot;
 
@@ -35,22 +38,29 @@ public class LoginTests {
 	public void setUp() throws Exception {
 		driver = DriverFactory.getDriver(DriverNames.CHROME);
 		loginPOM = new LoginPOM(driver); 
+		userportalPOM = new UserPortalPOM(driver);
 		baseUrl = properties.getProperty("baseURL");
 		screenShot = new ScreenShot(driver); 
 		// open the browser 
 		driver.get(baseUrl);
 	}
 	
-	@AfterMethod
+	//@AfterMethod
 	public void tearDown() throws Exception {
 		Thread.sleep(1000);
 		driver.quit();
 	}
 	@Test
-	public void validLoginTest() {
+	public void logoutTest() throws InterruptedException {
 		loginPOM.sendUserName("rajaravi");
-		loginPOM.sendPassword("prolearn@1213");
+		loginPOM.sendPassword("Password1");
 		loginPOM.clickLoginBtn(); 
-		screenShot.captureScreenShot("First");
+		screenShot.captureScreenShot("AfterLogin");
+		
+		userportalPOM.clickUsericon();
+		Thread.sleep(3000);
+		int count = userportalPOM.listmenuItemsCount();
+		userportalPOM.clicklogoutBtn(); 
+		Assert.assertEquals(count, 3); 
 	}
 }
